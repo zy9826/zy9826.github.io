@@ -1,1 +1,1 @@
-[]
+[{"categories":["linux"],"content":"记录Nginx操作 ","date":"2024-03-23","objectID":"/posts/9190390222c2/:0:0","tags":["nginx","linux"],"title":"Nginx常用操作","uri":"/posts/9190390222c2/"},{"categories":["linux"],"content":" 查看访问最频繁的前100个IP awk '{print $1}' access.log | sort -n |uniq -c | sort -rn | head -n 100 ","date":"2024-03-23","objectID":"/posts/9190390222c2/:0:1","tags":["nginx","linux"],"title":"Nginx常用操作","uri":"/posts/9190390222c2/"}]
