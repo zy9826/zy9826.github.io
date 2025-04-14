@@ -31,16 +31,8 @@ static int x2 = 1; // 在.data段
 2. 另一方面是对于现代的CPU来说，它们有着极为强大的缓存（Cache）体系。由于缓存在现代的计算机中地位非常重要，所以程序必须尽量提高缓存命中率，指令区和数据区的分离有利于提高程序的局部性。现代CPU的缓存一般都被设计成数据缓存和指令缓存分离，所以程序的指令和数据被分开存放对CPU的缓存命中率提高有好处。
 3. 第三个原因是共享指令。当系统中运行着多个该程序的副本时，它们的指令都是一样的，所以内存中只需要保存一份该程序的指令部分。对于指令这种只读的区域来说是这样，对于其他的只读数据也一样，比如很多程序里面带有的图标，图文，文本等资源也是数据可以共享的。当然每个副本进程的数据区域是不一样的，它们是进程私有的。
 
-&gt; **对于全局变量来说，如果初始化了不为0的值，那么该全局变量则被保存在data段，如果初始化的值为0，那么将其保存在bss段，如果没有初始化，则将其保存在common段，等到链接时再将其放入到BSS段。关于第三点不同编译器行为会不同，有的编译器会把没有初始化的全局变量直接放到BSS段。** [原文链接](https://blog.csdn.net/Arlingtonroad/article/details/107516680)
-
-### common段是什么 
-强符号：编译器默认函数和初始化的全局变量为强符号
-弱符号：未初始化的全局变量为弱符号。也可以通过atrribute((weak))来指定。
-编译器关于强弱符号的规则有：
-1. 强符号不允许多次定义，但强弱可以共存；
-2. 强弱共存时，强覆盖弱；
-3. 都是弱符号时，选择占用空间最大的，如选择double类型的而不选择int类型的。  
-初始化了的全局变量位于数据段，未初始化的静态位于bss段。[原文链接](https://blog.csdn.net/qq_19815741/article/details/126880716)              
+&gt; **对于全局变量来说，如果初始化了不为0的值，那么该全局变量则被保存在data段，如果初始化的值为0，那么将其保存在bss段，如果没有初始化，则将其保存在common段，等到链接时再将其放入到BSS段。关于第三点不同编译器行为会不同，有的编译器会把没有初始化的全局变量直接放到BSS段。**  [原文链接](https://blog.csdn.net/Arlingtonroad/article/details/107516680)  
+&gt; [**COMMON块详解**](https://www.cnblogs.com/fr-ruiyang/p/10483397.html)      
 
 ### 自定义段
 GCC提供了一个扩展机制，可以指定变量所处的段：
@@ -49,22 +41,96 @@ __attribute__((section(&#34;FOO&#34;))) int global = 42;
 __attribute__((section(&#34;BAR&#34;))) void foo() {}
 ```
 
-### 常用工具及用法: binutils, readelf, objdump
+### binutils(readelf, objdump, nm)常用工具及用法
 ``` bash
-# -h, --[section-]headers  Display the contents of the section headers
-objdump -h SimpleSection.o 
-
-
 # -s 显示所有请求section的内容
 # -d 反汇编
 objdump -s -d SimpleSection.o
 
-# size可以用来查看ELF文件的代码段，数据段和BSS段的长度
-size SimpleSection.o
+# 读取ELF头信息
+readelf -h SimpleSection.o
+
+# 读取段表头信息 section header
+readelf -SW SimpleSection.o
+objdump -h SimpleSection.o 
 ```
 
-## ELF文件结构描述
+### ELF文件结构描述
 ELF目标文件格式的最前部是ELF文件头，它包含了描述整个文件的基本属性，比如ELF文件版本，目标机器型号，程序入口地址等。
+详见章节3.4节
+
+
+## 链接的接口：符号
+在链接中，目标文件之间的相互拼合实际上是目标文件之间对地址的应用，即对函数和变量的地址的引用。我们将函数和变量统称为**符号**，函数名和变量名统称为**符号名**。几种不常用到的符号：    
+![不常用符号](img/001.png)  
+nm查看符号表：`nm SimpleSection.o`   
+
+## extern &#34;C&#34;
+extern语法规则
+``` cpp
+// 写法一
+extern &#34;C&#34; {
+int func();
+int var;
+}
+
+// 写法二
+extern &#34;C&#34; int func();
+extern &#34;C&#34; int var;
+
+// 导出CPP中的符号
+extern &#34;C&#34; double _ZN6myname3varE;
+```
+
+导出cpp命名空间中的变量
+``` cpp 
+#include &lt;stdio.h&gt;
+
+namespace myname
+{
+int var = 42;
+}
+
+extern &#34;C&#34; double _ZN6myname3varE;  // 定义不会报错, 使用时会有问题
+// extern &#34;C&#34; int _ZN6myname3varE;     // 正确定义
+
+int main(int argc, char* argv[])
+{
+    printf(&#34;%d\n&#34;, myname::var);              // 42
+    printf(&#34;%d\n&#34;, *(int*)&amp;_ZN6myname3varE);  // 42
+    printf(&#34;%d\n&#34;, int(_ZN6myname3varE));     // 0
+    return 0;
+}
+```
+
+## 强符号和弱符号
+强符号：编译器默认函数和初始化的全局变量为强符号
+弱符号：未初始化的全局变量为弱符号。也可以通过`__attibute__((weak))`来指定。   
+注意，强符号和弱符号都是针对定义来说的，不是针对符号引用。
+编译器关于强弱符号的规则有：
+1. 强符号不允许多次定义，但强弱可以共存；
+2. 强弱共存时，强覆盖弱；
+3. 都是弱符号时，选择占用空间最大的，如选择double类型的而不选择int类型的。  
+| 变量名称     | 初始化 | 未初始化 |
+| ------------ | ------ | -------- |
+| 全局变量     | .data  | .common  |
+| 静态全局变量 | .data  | .bss     |
+| 静态局部变量 | .data  | .bss     |
+``` cpp
+int g_init_var = 10;          // .data
+static int sg_init_var = 20;  // .data
+
+int g_uninit_var;          // .common
+static int sg_uninit_var;  // .bss
+
+int main(int argc, char* argv[])
+{
+    static int sl_init_var = 30;  // .data
+    static int sl_uninit_var;
+    return 0;
+}
+```   
+**强引用和弱引用详见3.5.5**
 
 ---
 
