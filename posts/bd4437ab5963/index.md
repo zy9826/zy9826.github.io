@@ -1,12 +1,30 @@
 # 常用指令记录
 
 
-&lt;!--more--&gt;
+<!--more-->
 
-1. hugo创建新文章：`hugo new posts/xxx.md` 或 `hugo new content posts/xxx.md`
-2. hugo启动项目：`hugo.exe server -D --disableFastRender`
-3. md增加全角缩进`&amp;emsp;`, 半角缩进`&amp;ensp;`
-4. git远程删除分支`git push origin --delete remotebranch` 和 `git push origin :remotebranch`
+## hugo
+- hugo创建新文章
+  ``` bash
+  hugo new posts/xxx.md
+  hugo new content posts/xxx.md
+  ```
+- hugo启动项目
+  ``` bash
+  hugo server -D 
+  # build草稿文章
+  hugo server --buildDrafts 
+  # 实时预览
+  hugo server -D --disableFastRender 
+  ```
+- md增加全角缩进`&emsp;`, 半角缩进`&ensp;`
+
+## iptables
+- 查看INPUTt表: `iptables -L INPUT -n --line-numbers`
+- 追加到INPUT表: `iptables -A INPUT -s 42.192.6.197 -j DROP`
+
+## git
+- git远程删除分支`git push origin --delete remotebranch` 和 `git push origin :remotebranch`
 
 less用法   
 less可以使用鼠标滚轮翻页，-N显示行号 -e显示百分比

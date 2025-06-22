@@ -1,7 +1,7 @@
 # 2编译和链接
 
 
-&lt;!--more--&gt;
+<!--more-->
 ## 温度而知新
 1. 北桥：负责CPU，GPU，内存等高速设备。南桥：负责键盘，鼠标，硬盘等低速设备
 2. 运行库使用操作系统提供的系统调用接口（System Call Interface），系统调用接口在实现中往往以软件中断（Software Interrupt）的方式提供，比如Linux使用0x80号中断作为系统调用接口，Windows使用0x2E号中断作为系统调用接口（从Windows XP Sp2开始，Windows开始采用一种新的系统调用方式）。
@@ -15,21 +15,21 @@
 编译分为4个步骤：预处理、编译、汇编、链接
 ### 预处理
 预处理过程主要处理那些源代码文件中的以“#”开始的预编译指令。比如“include”，“#define”等
-```bash {title=&#34;预处理&#34;}
+```bash {title="预处理"}
 gcc -E hello.c -o hello.i
-cpp hello.c &gt; hello.i
+cpp hello.c > hello.i
 ```
 
 ### 编译
 编译过程就是把预处理完的文件进行一系列词法分析，语法分析，语义分析及优化后生成的相应的汇编代码文件，这个过程往往是我们所说的整个程序构建的核心部分，也是最复杂的部分之一。
-```bash {title=&#34;编译&#34;}
+```bash {title="编译"}
 gcc -S hello.i -o hello.s
 /usr/lib/gcc/x86_64-linux-gnu/8/cc1 hello.c
 ```
 
 ### 汇编
 汇编器是将汇编代码转变成机器可以执行的指令，每一个汇编语句几乎都对应一条机器指令。
-```bash {title=&#34;汇编&#34;}
+```bash {title="汇编"}
 as hello.s -o hello.o
 gcc -c hello.s -o hello.o
 ```

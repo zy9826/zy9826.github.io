@@ -1,1 +1,1143 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>程序员的自我修养 - 合集 - Yu's Blog</title><link>https://blog.zy9826.site/collections/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/</link><description>程序员的自我修养 - 合集 | Yu's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 11 Jul 2024 00:50:15 +0800</lastBuildDate><atom:link href="https://blog.zy9826.site/collections/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/" rel="self" type="application/rss+xml"/><item><title>4静态链接</title><link>https://blog.zy9826.site/notebook/9c8304407540/</link><pubDate>Thu, 11 Jul 2024 00:50:15 +0800</pubDate><author>Yu</author><guid>https://blog.zy9826.site/notebook/9c8304407540/</guid><description>静态链接</description></item><item><title>3目标文件的格式</title><link>https://blog.zy9826.site/notebook/16b9b184070f/</link><pubDate>Mon, 10 Jun 2024 22:27:14 +0800</pubDate><author>Yu</author><guid>https://blog.zy9826.site/notebook/16b9b184070f/</guid><description>目标文件的格式现在PC平台流行的可执行文件格式主要时Windows下的PE（Portable Executable）和Linux的ELF（Ex</description></item><item><title>2编译和链接</title><link>https://blog.zy9826.site/notebook/a53d55b01c51/</link><pubDate>Mon, 10 Jun 2024 22:25:07 +0800</pubDate><author>Yu</author><guid>https://blog.zy9826.site/notebook/a53d55b01c51/</guid><description>温度而知新 北桥：负责CPU，GPU，内存等高速设备。南桥：负责键盘，鼠标，硬盘等低速设备 运行库使用操作系统提供的系统调用接口（System Call</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Yu's Blog</title><link>https://blog.zy9826.site/collections/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/</link><description>Yu's Blog</description><generator>Hugo 0.146.0 &amp; FixIt v0.3.18</generator><language>zh-cn</language><lastBuildDate>Sat, 07 Jun 2025 20:32:50 +0800</lastBuildDate><atom:link href="https://blog.zy9826.site/collections/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB/index.xml" rel="self" type="application/rss+xml"/><item><title>DosBox安装和汇编基础</title><link>https://blog.zy9826.site/notebook/7c53d0359678/</link><pubDate>Sat, 07 Jun 2025 20:32:50 +0800</pubDate><guid>https://blog.zy9826.site/notebook/7c53d0359678/</guid><category domain="https://blog.zy9826.site/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">汇编语言</category><description>&lt;h2 id="环境安装和调试指令" class="heading-element">&lt;span>环境安装和调试指令&lt;/span>
+ &lt;a href="#%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85%e5%92%8c%e8%b0%83%e8%af%95%e6%8c%87%e4%bb%a4" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ol>
+&lt;li>DosBox直接安装, MASM文件夹（包含调试工具）拷贝到D盘&lt;/li>
+&lt;li>设置DosBox窗口大小
+&lt;ul>
+&lt;li>到安装路径运行&lt;code>DOSBox 0.74 Options.bat&lt;/code>, 修改以下两行
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> windowresolution=1000x1300
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> output=ddraw&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>运行DosBox
+&lt;ul>
+&lt;li>输入以下命令挂载工具目录到C: &lt;code>mount c d:masm&lt;/code>&lt;/li>
+&lt;li>进入到C: &lt;code>c:&lt;/code>; 运行debug模式 &lt;code>debug&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>debug模式的常用命令
+&lt;ul>
+&lt;li>r: register, 查看或改变CPU寄存器的内容&lt;/li>
+&lt;li>d: dump, 查看内存中的内容&lt;/li>
+&lt;li>e: enter, 改写内存中的内容&lt;/li>
+&lt;li>u: unassemble, 将内存中的机器指令翻译成汇编指令&lt;/li>
+&lt;li>t: trace, 执行一条机器指令&lt;/li>
+&lt;li>a: assemble, 以汇编指令的格式在内存中写入一条机器指令&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="寄存器表" class="heading-element">&lt;span>寄存器表&lt;/span>
+ &lt;a href="#%e5%af%84%e5%ad%98%e5%99%a8%e8%a1%a8" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>AH&amp;amp;AL = AX(accumulator)：累加寄存器&lt;/li>
+&lt;li>BH&amp;amp;BL = BX(base)：基址寄存器&lt;/li>
+&lt;li>CH&amp;amp;CL = CX(count)：计数寄存器&lt;/li>
+&lt;li>DH&amp;amp;DL = DX(data)：数据寄存器&lt;/li>
+&lt;li>SP (Stack Pointer)：堆栈指针寄存器&lt;/li>
+&lt;li>BP (Base Pointer)：基址指针寄存器&lt;/li>
+&lt;li>SI (Source Index)：源变址寄存器&lt;/li>
+&lt;li>DI (Destination Index)：目的变址寄存器&lt;/li>
+&lt;li>IP (Instruction Pointer)：指令指针寄存器&lt;/li>
+&lt;li>CS (Code Segment)：代码段寄存器&lt;/li>
+&lt;li>DS (Data Segment)：数据段寄存器&lt;/li>
+&lt;li>SS (Stack Segment)：堆栈段寄存器&lt;/li>
+&lt;li>ES (Extra Segment)：附加段寄存器&lt;/li>
+&lt;/ul>
+&lt;h3 id="标志寄存器" class="heading-element">&lt;span>标志寄存器&lt;/span>
+ &lt;a href="#%e6%a0%87%e5%bf%97%e5%af%84%e5%ad%98%e5%99%a8" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>&lt;img loading="lazy" src='https://blog.zy9826.site/notebook/7c53d0359678/img/002.png' alt="标志寄存器结构" height="143" width="687">&lt;/p>
+&lt;ul>
+&lt;li>OF overflow flag 溢出标志: 操作数超出机器能表示的范围表示溢出，溢出时为1.&lt;/li>
+&lt;li>DF（方向标志）：用于串处理。DF=1时，每次操作后使SI/DI减小；DF=0时则增大。&lt;/li>
+&lt;li>IF（中断标志）：IF=1时，允许CPU响应可屏蔽中断，否则关闭中断。&lt;/li>
+&lt;li>TF（陷阱标志）：用于调试单步操作。&lt;/li>
+&lt;li>SF sign flag 符号标志: 记录运算结果的符号，结果为负时SF=1，否则SF=0。&lt;/li>
+&lt;li>ZF zero flag 零标志: 运算结果等于0时ZF=1，否则ZF=0。&lt;/li>
+&lt;li>AF（辅助进位标志）：运算时，第3位向第4位产生进位时为1，否则为0。&lt;/li>
+&lt;li>PF parity flag 奇偶标志: 运算结果操作数位为1的个数为偶数个时PF=1，否则PF=0。&lt;/li>
+&lt;li>CF carry flag 进位标志：最高有效位产生进位时CF=1，否则CF=0。&lt;/li>
+&lt;/ul>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>0/1&lt;/th>
+ &lt;th>OF&lt;/th>
+ &lt;th>DF&lt;/th>
+ &lt;th>SF&lt;/th>
+ &lt;th>ZF&lt;/th>
+ &lt;th>AF&lt;/th>
+ &lt;th>PF&lt;/th>
+ &lt;th>CF&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>1&lt;/td>
+ &lt;td>OV&lt;/td>
+ &lt;td>DN&lt;/td>
+ &lt;td>NG&lt;/td>
+ &lt;td>ZR&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>PE&lt;/td>
+ &lt;td>CY&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>0&lt;/td>
+ &lt;td>NV&lt;/td>
+ &lt;td>UP&lt;/td>
+ &lt;td>PL&lt;/td>
+ &lt;td>NZ&lt;/td>
+ &lt;td>&lt;/td>
+ &lt;td>PO&lt;/td>
+ &lt;td>NC&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h3 id="溢出标志具体检测方法" class="heading-element">&lt;span>溢出标志具体检测方法&lt;/span>
+ &lt;a href="#%e6%ba%a2%e5%87%ba%e6%a0%87%e5%bf%97%e5%85%b7%e4%bd%93%e6%a3%80%e6%b5%8b%e6%96%b9%e6%b3%95" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>CPU 在执行加法指令后，会检查两个操作数的最高位（符号位）和结果的最高位。如果两个操作数的符号位相同，而结果的符号位与操作数的符号位不同，就设置溢出标志。&lt;br>
+例如，对于两个 8 位有符号数 A 和 B，其符号位分别为 A7 和 B7，结果的符号位为 S7。如果 A7 = B7 且 A7 ≠ S7，就设置溢出标志。&lt;br>
+OF=0, CF=1 : D0h+E0h&lt;br>
+OF=1, CF=0 : 7Fh+01h=80(-128)&lt;br>
+OF=1, CF=1 : 90h+90h&lt;/p>
+&lt;h2 id="常用指令" class="heading-element">&lt;span>常用指令&lt;/span>
+ &lt;a href="#%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>mov, 赋值指令; &lt;code>mov ax,100&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>add, 加法指令, add指令溢出后高位舍弃; &lt;code>add ax,100&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>sub, 减法指令, sub指令溢出后高位舍弃; &lt;code>sub ax,100&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>and, 按位与指令; &lt;code>and ax,3333h&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>or, 按位或指令; &lt;code>or ax,3333h&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>shl/shr, 逻辑左移/右移指令, 功能如下:&lt;/p>
+&lt;ul>
+&lt;li>将一个寄存器或内存单元中的数据向左移位&lt;/li>
+&lt;li>将最后移出的一位写入CF中,&lt;/li>
+&lt;li>最低位用0填充&lt;/li>
+&lt;li>例: &lt;code>shl ax,1&lt;/code>; 使用立即数时只能移动一位&lt;/li>
+&lt;li>移动多位需要使用寄存器, 例:&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">mov cl, 3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">shl ax, cl&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>inc: 自增1 &lt;code>inc ax&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>dec: 自减1 &lt;code>dec ax&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>nop: 空指令&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>xchg: 交换指令 &lt;code>xchg ax,bx&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>neg: 算术取反 &lt;code>neg ax&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>int: 中断 &lt;code>int 21h&lt;/code> 退出程序&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>ds寄存器不能赋值立即数&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-asm" data-lang="asm">&lt;span class="line">&lt;span class="cl">&lt;span class="nf">mov&lt;/span> &lt;span class="no">ax&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">21&lt;/span>&lt;span class="no">F0h&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">mov&lt;/span> &lt;span class="no">ds&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="no">ax&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">mov&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">],&lt;/span>&lt;span class="no">ax&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>jmp: 跳转指令, 修改CS:IP&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">jmp ax
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">jmp 1000:3&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="mul指令" class="heading-element">&lt;span>mul指令&lt;/span>
+ &lt;a href="#mul%e6%8c%87%e4%bb%a4" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;ul>
+&lt;li>mul是乘法指令, 需要注意的是: 两个相乘的数要么都是8位,要么都是16位. 如果是8位一个默认放在AL中, 另一个放在8位reg或内存单元中; 如何是16位, 一个默认在AX中, 另一个放在16位reg或内存单元中.&lt;/li>
+&lt;li>结果: 如果是8位乘法, 结果默认放在AX中; 如果是16位乘法, 结果高位默认存放在DX中, 低位存放在AX中&lt;/li>
+&lt;/ul>
+&lt;h3 id="div指令" class="heading-element">&lt;span>div指令&lt;/span>
+ &lt;a href="#div%e6%8c%87%e4%bb%a4" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>div是除法指令, 使用此指令是应注意以下问题:&lt;/p>
+&lt;ol>
+&lt;li>除数, 有8位和16位两种, 在一个reg或内存单元中&lt;/li>
+&lt;li>被除数, 默认放在 AX 或 DX和AX 中, 如果除数位8位, 被除数则为16位, 默认放在AX中存放; 如果除数为16为, 被除数则为32位, 在DX和AX中存放, DX放高16位, AX放低16位.
+举例:&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-asm" data-lang="asm">&lt;span class="line">&lt;span class="cl">&lt;span class="nf">div&lt;/span> &lt;span class="no">byte&lt;/span> &lt;span class="no">ptr&lt;/span> &lt;span class="no">ds&lt;/span>&lt;span class="p">:[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>(al)=(ax)/(ds&lt;em>10h+0) ;商&lt;br>
+(ah)=(ax)/(ds&lt;/em>10h+0) ;余数&lt;/p>
+&lt;h2 id="栈" class="heading-element">&lt;span>栈&lt;/span>
+ &lt;a href="#%e6%a0%88" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>push ax的执行有以下两步完成:&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>SP=SP-2, SS:SP指针移动&lt;/li>
+&lt;li>将ax中的内容送入SS:SP指向的内存单元处, SS:SP不变&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>pop ax的执行有以下两步完成:&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>将SS:SP指向的内存单元处的数据送入ax中&lt;/li>
+&lt;li>SP=SP+2, SS:SP指针移动&lt;/li>
+&lt;/ol>
+&lt;h2 id="寻址方式" class="heading-element">&lt;span>寻址方式&lt;/span>
+ &lt;a href="#%e5%af%bb%e5%9d%80%e6%96%b9%e5%bc%8f" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;h3 id="bx和bp寄存器" class="heading-element">&lt;span>bx和bp寄存器&lt;/span>
+ &lt;a href="#bx%e5%92%8cbp%e5%af%84%e5%ad%98%e5%99%a8" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>bx: 基址寄存器, 默认以ds为段地址&lt;br>
+bp: 基址指针寄存器, 如果不显示指定段地址, 则默认以ss为段地址&lt;br>
+[bx+idata] : &lt;code>mov ax,[bx+1]&lt;/code>&lt;br>
+[bx]可以指向一个内存单元, +1是偏移地址:&lt;/p>
+&lt;h3 id="si和di寄存器" class="heading-element">&lt;span>si和di寄存器&lt;/span>
+ &lt;a href="#si%e5%92%8cdi%e5%af%84%e5%ad%98%e5%99%a8" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>si,di寄存器是和bx功能相似的寄存器, si和di不能分成两个8位寄存器来使用&lt;br>
+[bx+si] : &lt;code>mov ax,[bx+si]&lt;/code>&lt;br>
+[bx+di] : &lt;code>mov ax,[bx+di]&lt;/code>&lt;br>
+[bx+si/di+idata] : &lt;code>mov ax,[bx+si+16]&lt;/code>&lt;br>
+&lt;img loading="lazy" src='https://blog.zy9826.site/notebook/7c53d0359678/img/001.png' alt="寻址方式" height="1057" width="1140">&lt;/p></description></item><item><title>Ubuntu配置为路由器</title><link>https://blog.zy9826.site/posts/3cda1f709fce/</link><pubDate>Mon, 14 Apr 2025 23:55:44 +0800</pubDate><guid>https://blog.zy9826.site/posts/3cda1f709fce/</guid><category domain="https://blog.zy9826.site/categories/draft/">Draft</category><description>&lt;p>需求：将树莓派配置成中继路由器；树莓派的wlan0连接wifi做wan口，eth0网口连接电脑做lan口，使电脑可以通过网线连接树莓派上网，并支持ipv6。&lt;/p>
+&lt;h2 id="配置网口" class="heading-element">&lt;span>配置网口&lt;/span>
+ &lt;a href="#%e9%85%8d%e7%bd%ae%e7%bd%91%e5%8f%a3" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>wlan0做wan口，连接wifi，设置为dhcp &lt;br>
+eth0做lan口连接电脑，设置为静态ip&lt;br>
+配置如下：
+&lt;code>vim /etc/netplan/50-cloud-init.yaml&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">network&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">ethernets&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">eth0&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dhcp4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="m">192.168.2.1&lt;/span>&lt;span class="l">/24&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">wifis&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">wlan0&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dhcp4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">nameservers&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">8.8.8.8&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="m">114.114.114.114&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="m">8.8.4.4&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">access-points&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;HUAWEI-1ER0EH_5G&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">password&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;xxxxxxxxxxx&amp;#34;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">renderer&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">networkd&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>netplan apply&lt;/code>&lt;/p>
+&lt;h2 id="启用ip转发" class="heading-element">&lt;span>启用IP转发&lt;/span>
+ &lt;a href="#%e5%90%af%e7%94%a8ip%e8%bd%ac%e5%8f%91" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>编辑文件 &lt;code>vim /etc/sysctl.conf&lt;/code>
+修改此行&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">net.ipv4.ip_forward=1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">net.ipv6.conf.all.forwarding = 1&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>应用修改&lt;code>sysctl -p&lt;/code>&lt;/p>
+&lt;h2 id="配置nat" class="heading-element">&lt;span>配置NAT&lt;/span>
+ &lt;a href="#%e9%85%8d%e7%bd%aenat" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>使用iptables配置NAT，允许局域网设备通过Ubuntu主机访问互联网: &lt;br>
+&lt;code>iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE&lt;/code>&lt;br>
+&lt;code>ip6tables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE&lt;/code>&lt;br>
+安装iptables-perisistent保存iptables配置: &lt;br>
+&lt;code>iptables-save &amp;gt; /etc/iptables/rules.v4&lt;/code>&lt;/p>
+&lt;h2 id="配置dhcp服务器" class="heading-element">&lt;span>配置DHCP服务器&lt;/span>
+ &lt;a href="#%e9%85%8d%e7%bd%aedhcp%e6%9c%8d%e5%8a%a1%e5%99%a8" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>安装isc-dhcp-server&lt;/li>
+&lt;li>配置isc-dhcp-server
+&lt;ul>
+&lt;li>
+&lt;p>vim /etc/default/isc-dhcp-server&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">INTERFACESv4=&amp;#34;eth1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">INTERFACESv6=&amp;#34;eth0&amp;#34;&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>vim /etc/dhcp/dhcpd.conf&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">subnet 192.168.2.0 netmask 255.255.255.0 {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> range 192.168.2.10 192.168.2.200;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> option routers 192.168.2.1;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> option broadcast-address 192.168.2.255;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> option domain-name-servers 8.8.8.8, 8.8.4.4;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> default-lease-time 600;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> max-lease-time 7200;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>重启isc-dhcp-server服务&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">systemctl restart isc-dhcp-server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl &lt;span class="nb">enable&lt;/span> isc-dhcp-server&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="使用radvd配置dhcpv6" class="heading-element">&lt;span>使用radvd配置dhcpv6&lt;/span>
+ &lt;a href="#%e4%bd%bf%e7%94%a8radvd%e9%85%8d%e7%bd%aedhcpv6" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>&lt;code>apt install radvd&lt;/code>&lt;br>
+&lt;code>vim /etc/radvd.conf&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">interface eth0 {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> AdvSendAdvert on;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MinRtrAdvInterval 3;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> MaxRtrAdvInterval 10;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> prefix 2001:da8:d805:a210:a1::/64{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> };
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">};&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>systemctl restart radvd&lt;/code>&lt;br>
+&lt;code>systemctl enable radvd&lt;/code>&lt;/p></description></item><item><title>操作系统基础</title><link>https://blog.zy9826.site/notebook/cd1c15242598/</link><pubDate>Tue, 17 Sep 2024 12:33:08 +0800</pubDate><guid>https://blog.zy9826.site/notebook/cd1c15242598/</guid><category domain="https://blog.zy9826.site/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</category><description>&lt;h2 id="操作系统基础" class="heading-element">&lt;span>操作系统基础&lt;/span>
+ &lt;a href="#%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e5%9f%ba%e7%a1%80" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>操作系统是直接运行于硬件之上的计算机程序&lt;br>
+操作系统用于管理和控制计算机的硬件与软件资源&lt;br>
+操作系统为用户软件的开发提供必要的服务和接口&lt;/p>
+&lt;h3 id="系统启动流程" class="heading-element">&lt;span>系统启动流程&lt;/span>
+ &lt;a href="#%e7%b3%bb%e7%bb%9f%e5%90%af%e5%8a%a8%e6%b5%81%e7%a8%8b" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;ol>
+&lt;li>上电&lt;/li>
+&lt;li>运行BIOS&lt;/li>
+&lt;li>硬件初始化&lt;/li>
+&lt;li>建立中断向量表&lt;/li>
+&lt;li>BIOS最后使命：在存储介质中查找主引导区&lt;/li>
+&lt;li>找到主引导区后，加载运行主引导程序&lt;/li>
+&lt;li>软件初始化&lt;/li>
+&lt;li>加载运行操作系统内核&lt;/li>
+&lt;li>系统初始化&lt;/li>
+&lt;/ol>
+&lt;h2 id="biosbase-input-output-system" class="heading-element">&lt;span>BIOS(Base Input Output System)&lt;/span>
+ &lt;a href="#biosbase-input-output-system" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>BIOS是计算机上电后第一个运行的程序（BIOS属于固件）&lt;br>
+BIOS首先检测硬件状态，检测通过后立即进行硬件初始化&lt;br>
+BIOS会在内存中建立中断向量表（提供硬件访问的方法）&lt;br>
+BIOS最后将控制权交由主引导程序执行&lt;/p>
+&lt;h3 id="bios是如何被运行起来的bios的运行机制" class="heading-element">&lt;span>BIOS是如何被运行起来的？（BIOS的运行机制）&lt;/span>
+ &lt;a href="#bios%e6%98%af%e5%a6%82%e4%bd%95%e8%a2%ab%e8%bf%90%e8%a1%8c%e8%b5%b7%e6%9d%a5%e7%9a%84bios%e7%9a%84%e8%bf%90%e8%a1%8c%e6%9c%ba%e5%88%b6" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>BIOS存储于ROM中，地址映射为0xF0000-0xFFFFF（实地址）&lt;br>
+BIOS的入口地址为：0xFFFF0&lt;br>
+引荐电路的特殊设计使得开机后CPU从0xFFFF0处开始执行&lt;/p>
+&lt;h3 id="bios最后的使命" class="heading-element">&lt;span>BIOS最后的使命&lt;/span>
+ &lt;a href="#bios%e6%9c%80%e5%90%8e%e7%9a%84%e4%bd%bf%e5%91%bd" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>按照用于的设置扫描各个存储介质（光驱，软驱，U盘等）
+发现主引导区后，将主引导区中的主引导程序载入内存
+主引导程序在内存中的入口地址为0x7c00
+将控制权交由主引导程序执行&lt;code>jmp 0x7c00&lt;/code>&lt;/p>
+&lt;h3 id="bios如何寻找主引导程序主引导区" class="heading-element">&lt;span>BIOS如何寻找主引导程序？（主引导区）&lt;/span>
+ &lt;a href="#bios%e5%a6%82%e4%bd%95%e5%af%bb%e6%89%be%e4%b8%bb%e5%bc%95%e5%af%bc%e7%a8%8b%e5%ba%8f%e4%b8%bb%e5%bc%95%e5%af%bc%e5%8c%ba" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>位置：位于存储介质的最开始位置处，大小为512字节
+特点：前512字节的最后2个有效字节为0x55aa
+数据：0x55aa之前的数据被视为主引导程序&lt;/p>
+&lt;p>汇编基础&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>$&lt;/code>表示当前指令行地址&lt;/li>
+&lt;li>&lt;code>$$&lt;/code>表示当前汇编段起始地址&lt;/li>
+&lt;/ul>
+&lt;h2 id="调试环境" class="heading-element">&lt;span>调试环境&lt;/span>
+ &lt;a href="#%e8%b0%83%e8%af%95%e7%8e%af%e5%a2%83" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;h3 id="命令工具" class="heading-element">&lt;span>命令工具&lt;/span>
+ &lt;a href="#%e5%91%bd%e4%bb%a4%e5%b7%a5%e5%85%b7" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用nasm编译&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nasm boot.asm -o boot.bin 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 使用交互方式创建a.img&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">bximage a.img 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dd &lt;span class="k">if&lt;/span>&lt;span class="o">=&lt;/span>boot.bin &lt;span class="nv">of&lt;/span>&lt;span class="o">=&lt;/span>a.img &lt;span class="nv">bs&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">512&lt;/span> &lt;span class="nv">count&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">1&lt;/span> &lt;span class="nv">conv&lt;/span>&lt;span class="o">=&lt;/span>notrunc&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="boot程序打印字符" class="heading-element">&lt;span>boot程序:打印字符&lt;/span>
+ &lt;a href="#boot%e7%a8%8b%e5%ba%8f%e6%89%93%e5%8d%b0%e5%ad%97%e7%ac%a6" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-asm" data-lang="asm">&lt;span class="line">&lt;span class="cl">&lt;span class="nf">org&lt;/span> &lt;span class="mi">0x7c00&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nl">start:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="no">ax&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="no">cs&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="no">ss&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="no">ax&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="no">ds&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="no">ax&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="no">es&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="no">ax&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="no">si&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="no">msg&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nl">print:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="no">al&lt;/span>&lt;span class="p">,[&lt;/span>&lt;span class="no">si&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">add&lt;/span> &lt;span class="no">si&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">cmp&lt;/span> &lt;span class="no">al&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0x00&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">je&lt;/span> &lt;span class="no">last&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="no">ah&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0x0e&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">mov&lt;/span> &lt;span class="no">bx&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0x0f&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">int&lt;/span> &lt;span class="mi">0x10&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">jmp&lt;/span> &lt;span class="no">print&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nl">last:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">hlt&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">jmp&lt;/span> &lt;span class="no">last&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nl">msg:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">db&lt;/span> &lt;span class="mi">0x0a&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0x0a&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">db&lt;/span> &lt;span class="err">&amp;#34;&lt;/span>&lt;span class="no">Hello&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="no">DTOS&lt;/span>&lt;span class="p">!&lt;/span>&lt;span class="err">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">db&lt;/span> &lt;span class="mi">0x0a&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0x0a&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">times&lt;/span> &lt;span class="mi">510&lt;/span>&lt;span class="p">-(&lt;/span>&lt;span class="no">$-$$&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="no">db&lt;/span> &lt;span class="mi">0x00&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">db&lt;/span> &lt;span class="mi">0x55&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0xaa&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="bochs" class="heading-element">&lt;span>bochs&lt;/span>
+ &lt;a href="#bochs" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;h3 id="安装bochs" class="heading-element">&lt;span>安装bochs&lt;/span>
+ &lt;a href="#%e5%ae%89%e8%a3%85bochs" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">apt install bochs vgabios
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">which bochs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">whereis vgabios&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="bochs启动方式" class="heading-element">&lt;span>bochs启动方式&lt;/span>
+ &lt;a href="#bochs%e5%90%af%e5%8a%a8%e6%96%b9%e5%bc%8f" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;ol>
+&lt;li>显示方式：bochs -f bochsrc_file&lt;/li>
+&lt;li>隐式方式：bochs 命令执行后会在当前路径查找以下配置文件：.bochsrc bochsrc bochsrc.txt&lt;/li>
+&lt;/ol>
+&lt;h3 id="bochs启动文件" class="heading-element">&lt;span>bochs启动文件&lt;/span>
+ &lt;a href="#bochs%e5%90%af%e5%8a%a8%e6%96%87%e4%bb%b6" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># how much memory the emulated machine will have
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">megs:32
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#filename of ROM images
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">romimage: file=/usr/local/share/bochs/BIOS-bochs-latest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vgaromimage: file=/usr/share/vgabios/vgabios.bin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#what disk images will be used
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># floppya: 1_44=&amp;#34;freedos.img&amp;#34;, status=inserted
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">floppya: 1_44=&amp;#34;data.img&amp;#34;, status=inserted
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#choose the boot disk
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">boot: floppy
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#where do we send log messages?
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#log bochsout.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># disable the mouse
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mouse: enabled=0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#enable key mapping, usering us layout as default
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">keyboard: keymap=/usr/local/share/bochs/keymaps/x11-pc-us.map&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>docker用法</title><link>https://blog.zy9826.site/posts/df6cd2b0b2ad/</link><pubDate>Sat, 17 Aug 2024 12:28:50 +0800</pubDate><guid>https://blog.zy9826.site/posts/df6cd2b0b2ad/</guid><category domain="https://blog.zy9826.site/categories/draft/">Draft</category><description>&lt;h2 id="镜像管理" class="heading-element">&lt;span>镜像管理&lt;/span>
+ &lt;a href="#%e9%95%9c%e5%83%8f%e7%ae%a1%e7%90%86" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ol>
+&lt;li>搜索官方仓库镜像：&lt;code>docker search centos&lt;/code>&lt;/li>
+&lt;li>拉取镜像：&lt;code>docker pull centos&lt;/code>&lt;/li>
+&lt;li>拉去第三方镜像：&lt;code>docker pull index.tenxcloud.com/tenxcloud/httpd&lt;/code>&lt;/li>
+&lt;li>查看当前主机镜像列表：&lt;code>docker image list&lt;/code>&lt;/li>
+&lt;li>删除镜像：&lt;code>docker image rm centos:latest&lt;/code> &lt;code>docker image rm [IMAGE ID]&lt;/code>&lt;/li>
+&lt;li>导出镜像：&lt;code>docker image save centos &amp;gt; docker-centos.tar.gz&lt;/code>&lt;/li>
+&lt;li>导入镜像：&lt;code>docker image load -i docker-centos.tar.gz &lt;/code>&lt;/li>
+&lt;li>查看镜像详细信息：&lt;code>docker image inspect centos&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h2 id="容器管理" class="heading-element">&lt;span>容器管理&lt;/span>
+ &lt;a href="#%e5%ae%b9%e5%99%a8%e7%ae%a1%e7%90%86" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ol>
+&lt;li>运行容器：&lt;code>docker run nginx&lt;/code>&lt;/li>
+&lt;li>查看正在运行的容器：&lt;code>docker container ls&lt;/code> &lt;code>docker ps&lt;/code>&lt;/li>
+&lt;li>查看所有容器：&lt;code>docker ps -a&lt;/code>&lt;/li>
+&lt;li>查看容器详细信息：&lt;code>docker container inspect 容器名称/id&lt;/code>&lt;/li>
+&lt;li>容器start/stop/kill：&lt;code>docker start/stop/kill 容器名称/id&lt;/code>&lt;/li>
+&lt;li>删除容器：&lt;code>docker rm 容器名称/id&lt;/code>&lt;/li>
+&lt;li>删除所有容器: &lt;code>docker rm -f `docker ps -a -q`&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h2 id="容器启动" class="heading-element">&lt;span>容器启动&lt;/span>
+ &lt;a href="#%e5%ae%b9%e5%99%a8%e5%90%af%e5%8a%a8" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ol>
+&lt;li>启动时交互：&lt;code>docker run -it nginx:latest /bin/bash&lt;/code>&lt;/li>
+&lt;li>退出容器：ctrl+p &amp;amp; ctrl+q&lt;/li>
+&lt;li>attach进入容器：&lt;code>docker attach 1bf0f43c4d2f&lt;/code>&lt;/li>
+&lt;li>-p端口映射：&lt;code>docker run -d -p 8888:80 nginx:latest #-p hostPort:containerPort -d detach&lt;/code>&lt;/li>
+&lt;li>挂载时创建卷：`docker run -d -p 80:80 -v /data:/usr/share/nginx/html nginx:latest&lt;/li>
+&lt;/ol>
+&lt;h2 id="volume管理" class="heading-element">&lt;span>volume管理&lt;/span>
+ &lt;a href="#volume%e7%ae%a1%e7%90%86" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ol>
+&lt;li>创建卷：&lt;code>docker volume create [volume name]&lt;/code>&lt;/li>
+&lt;li>查看卷列表：&lt;code>docker volume ls&lt;/code>&lt;/li>
+&lt;li>查看卷信息：&lt;code>docker volumn inspect [volumn_name]&lt;/code>&lt;/li>
+&lt;li>使用卷创建：&lt;code>docker run -d -p 9000:80 -v clsn:/usr/share/nginx/html nginx:latest &lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h2 id="配置容器镜像" class="heading-element">&lt;span>配置容器镜像&lt;/span>
+ &lt;a href="#%e9%85%8d%e7%bd%ae%e5%ae%b9%e5%99%a8%e9%95%9c%e5%83%8f" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo mkdir -p /etc/docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo tee /etc/docker/daemon.json &lt;span class="s">&amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">{
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;registry-mirrors&amp;#34;: [
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;https://docker.m.daocloud.io&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;https://dockerproxy.com&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;https://docker.nju.edu.cn&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> ]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl daemon-reload
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl restart docker&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>4静态链接</title><link>https://blog.zy9826.site/notebook/9c8304407540/</link><pubDate>Thu, 11 Jul 2024 00:50:15 +0800</pubDate><guid>https://blog.zy9826.site/notebook/9c8304407540/</guid><category domain="https://blog.zy9826.site/categories/%E7%AC%94%E8%AE%B0/">笔记</category><description>&lt;h2 id="静态链接" class="heading-element">&lt;span>静态链接&lt;/span>
+ &lt;a href="#%e9%9d%99%e6%80%81%e9%93%be%e6%8e%a5" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2></description></item><item><title>3目标文件的格式</title><link>https://blog.zy9826.site/notebook/16b9b184070f/</link><pubDate>Mon, 10 Jun 2024 22:27:14 +0800</pubDate><guid>https://blog.zy9826.site/notebook/16b9b184070f/</guid><category domain="https://blog.zy9826.site/categories/%E7%AC%94%E8%AE%B0/">笔记</category><description>&lt;h2 id="目标文件的格式" class="heading-element">&lt;span>目标文件的格式&lt;/span>
+ &lt;a href="#%e7%9b%ae%e6%a0%87%e6%96%87%e4%bb%b6%e7%9a%84%e6%a0%bc%e5%bc%8f" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>现在PC平台流行的可执行文件格式主要时Windows下的PE（Portable Executable）和Linux的ELF（Executable Linkable Format），它们都是COFF（Common file format）格式的变种。&lt;br>
+目标文件就是源文件编译后但未进行链接的那些中间文件（Windows的.obj和Linux的.o），它跟可执行文件的内容与结构很相似，所以一般跟可执行文件格式一起采用同一种格式存储。&lt;br>
+从广义上看，目标文件与可执行文件的格式其实几乎是一样的，所以我们可以广义地将目标文件与可执行文件看成事一种类型的文件，在Windows下，我们可以统称他们为PE-COFF文件格式。在Linux下，我们可以将他们统称为ELF文件。&lt;br>
+静态链接库稍有不同，它是很多目标文件捆绑在一起形成一个文件，再加上一些索引，可以简单的把它理解为一个包含有很多目标文件的文件包。&lt;/p>
+&lt;ul>
+&lt;li>可重定位文件（Relocatable File）：这类文件包含了代码和数据，可以被用来链接成可执行文件或共享目标文件，静态链接库也可以归为这一类。例，Linux的.o和Windows的.obj&lt;/li>
+&lt;li>可执行文件（Executable File）：这类文件包含了可以直接执行的程序，它的代表就是ELF可执行文件。&lt;/li>
+&lt;li>共享目标文件（shared Object File）：Linux的so和Windows的DLL&lt;/li>
+&lt;li>核心转储文件（Core Dump File）：Linux下的core dump&lt;/li>
+&lt;/ul>
+&lt;h3 id="目标文件是什么样的" class="heading-element">&lt;span>目标文件是什么样的&lt;/span>
+ &lt;a href="#%e7%9b%ae%e6%a0%87%e6%96%87%e4%bb%b6%e6%98%af%e4%bb%80%e4%b9%88%e6%a0%b7%e7%9a%84" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>目标文件中的内容有编译后的机器指令代码，还包括了链接时所需要的一些信息，比如符号表、调试信息、字符串等。一般目标文件将这些信息按不同的属性，以节Section的形式存储，有时候也叫段Segment。&lt;/p>
+&lt;ul>
+&lt;li>.text: 保存编译后的机器码&lt;/li>
+&lt;li>.data: 保存已初始化的全局变量和局部静态变量&lt;/li>
+&lt;li>.bss: (Block Started by Symbol)bss段只是为未初始化的全局变量和局部静态变量预留位置，它并没有内容（默认值都是0）。&lt;/li>
+&lt;li>.rodata段: 用于存放只读数据，一般数程序里面的只读变量，如const修饰的变量和常量字符串&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="k">static&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">x1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 在.bss段
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">static&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">x2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 在.data段
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 初始化为0可以认为是未初始化,所以被优化掉了可以放在bss段
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>总体来说，程序源代码被编译后主要分为两种段，程序指令和程序数据。代码段属于程序指令，而数据段和.bss属于程序数据。&lt;/p>
+&lt;h3 id="为什么把程序指令和数据分开放优点是什么" class="heading-element">&lt;span>为什么把程序指令和数据分开放？优点是什么？&lt;/span>
+ &lt;a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e6%8a%8a%e7%a8%8b%e5%ba%8f%e6%8c%87%e4%bb%a4%e5%92%8c%e6%95%b0%e6%8d%ae%e5%88%86%e5%bc%80%e6%94%be%e4%bc%98%e7%82%b9%e6%98%af%e4%bb%80%e4%b9%88" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;ol>
+&lt;li>一方面是当程序被装载后，数据和指令分别被映射到两个虚拟区域，由于数据区域读进程来说是可读写的，而指令区域对进程来说是只读的，所以这两个虚存区域的权限可以分别被设置成可读写和只读。这样可以方式程序的指令被有意或无意的改写。&lt;/li>
+&lt;li>另一方面是对于现代的CPU来说，它们有着极为强大的缓存（Cache）体系。由于缓存在现代的计算机中地位非常重要，所以程序必须尽量提高缓存命中率，指令区和数据区的分离有利于提高程序的局部性。现代CPU的缓存一般都被设计成数据缓存和指令缓存分离，所以程序的指令和数据被分开存放对CPU的缓存命中率提高有好处。&lt;/li>
+&lt;li>第三个原因是共享指令。当系统中运行着多个该程序的副本时，它们的指令都是一样的，所以内存中只需要保存一份该程序的指令部分。对于指令这种只读的区域来说是这样，对于其他的只读数据也一样，比如很多程序里面带有的图标，图文，文本等资源也是数据可以共享的。当然每个副本进程的数据区域是不一样的，它们是进程私有的。&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>&lt;strong>对于全局变量来说，如果初始化了不为0的值，那么该全局变量则被保存在data段，如果初始化的值为0，那么将其保存在bss段，如果没有初始化，则将其保存在common段，等到链接时再将其放入到BSS段。关于第三点不同编译器行为会不同，有的编译器会把没有初始化的全局变量直接放到BSS段。&lt;/strong> &lt;a href="https://blog.csdn.net/Arlingtonroad/article/details/107516680"target="_blank" rel="external nofollow noopener noreferrer">原文链接&lt;/a>&lt;br>
+&lt;a href="https://www.cnblogs.com/fr-ruiyang/p/10483397.html"target="_blank" rel="external nofollow noopener noreferrer">&lt;strong>COMMON块详解&lt;/strong>&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;h3 id="自定义段" class="heading-element">&lt;span>自定义段&lt;/span>
+ &lt;a href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e6%ae%b5" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>GCC提供了一个扩展机制，可以指定变量所处的段：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="nf">__attribute__&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nf">section&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;FOO&amp;#34;&lt;/span>&lt;span class="p">)))&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">global&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">42&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">__attribute__&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="nf">section&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;BAR&amp;#34;&lt;/span>&lt;span class="p">)))&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">foo&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="binutilsreadelf-objdump-nm常用工具及用法" class="heading-element">&lt;span>binutils(readelf, objdump, nm)常用工具及用法&lt;/span>
+ &lt;a href="#binutilsreadelf-objdump-nm%e5%b8%b8%e7%94%a8%e5%b7%a5%e5%85%b7%e5%8f%8a%e7%94%a8%e6%b3%95" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># -s 显示所有请求section的内容&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># -d 反汇编&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">objdump -s -d SimpleSection.o
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 读取ELF头信息&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">readelf -h SimpleSection.o
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 读取段表头信息 section header&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">readelf -SW SimpleSection.o
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">objdump -h SimpleSection.o &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="elf文件结构描述" class="heading-element">&lt;span>ELF文件结构描述&lt;/span>
+ &lt;a href="#elf%e6%96%87%e4%bb%b6%e7%bb%93%e6%9e%84%e6%8f%8f%e8%bf%b0" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>ELF目标文件格式的最前部是ELF文件头，它包含了描述整个文件的基本属性，比如ELF文件版本，目标机器型号，程序入口地址等。
+详见章节3.4节&lt;/p>
+&lt;h2 id="链接的接口符号" class="heading-element">&lt;span>链接的接口：符号&lt;/span>
+ &lt;a href="#%e9%93%be%e6%8e%a5%e7%9a%84%e6%8e%a5%e5%8f%a3%e7%ac%a6%e5%8f%b7" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>在链接中，目标文件之间的相互拼合实际上是目标文件之间对地址的应用，即对函数和变量的地址的引用。我们将函数和变量统称为&lt;strong>符号&lt;/strong>，函数名和变量名统称为&lt;strong>符号名&lt;/strong>。几种不常用到的符号： &lt;br>
+&lt;img loading="lazy" src='https://blog.zy9826.site/notebook/16b9b184070f/img/001.png' alt="不常用符号" height="754" width="943">&lt;br>
+nm查看符号表：&lt;code>nm SimpleSection.o&lt;/code>&lt;/p>
+&lt;h2 id="extern-c" class="heading-element">&lt;span>extern &amp;ldquo;C&amp;rdquo;&lt;/span>
+ &lt;a href="#extern-c" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>extern语法规则&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 写法一
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">extern&lt;/span> &lt;span class="s">&amp;#34;C&amp;#34;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">func&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">var&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 写法二
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">extern&lt;/span> &lt;span class="s">&amp;#34;C&amp;#34;&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">func&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">extern&lt;/span> &lt;span class="s">&amp;#34;C&amp;#34;&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">var&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 导出CPP中的符号
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">extern&lt;/span> &lt;span class="s">&amp;#34;C&amp;#34;&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">_ZN6myname3varE&lt;/span>&lt;span class="p">;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>导出cpp命名空间中的变量&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">namespace&lt;/span> &lt;span class="n">myname&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">var&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">42&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">extern&lt;/span> &lt;span class="s">&amp;#34;C&amp;#34;&lt;/span> &lt;span class="kt">double&lt;/span> &lt;span class="n">_ZN6myname3varE&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 定义不会报错, 使用时会有问题
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// extern &amp;#34;C&amp;#34; int _ZN6myname3varE; // 正确定义
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">argc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="n">argv&lt;/span>&lt;span class="p">[])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">myname&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">var&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 42
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">_ZN6myname3varE&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 42
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;%d&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">_ZN6myname3varE&lt;/span>&lt;span class="p">));&lt;/span> &lt;span class="c1">// 0
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="强符号和弱符号" class="heading-element">&lt;span>强符号和弱符号&lt;/span>
+ &lt;a href="#%e5%bc%ba%e7%ac%a6%e5%8f%b7%e5%92%8c%e5%bc%b1%e7%ac%a6%e5%8f%b7" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>强符号：编译器默认函数和初始化的全局变量为强符号
+弱符号：未初始化的全局变量为弱符号。也可以通过&lt;code>__attibute__((weak))&lt;/code>来指定。&lt;br>
+注意，强符号和弱符号都是针对定义来说的，不是针对符号引用。
+编译器关于强弱符号的规则有：&lt;/p>
+&lt;ol>
+&lt;li>强符号不允许多次定义，但强弱可以共存；&lt;/li>
+&lt;li>强弱共存时，强覆盖弱；&lt;/li>
+&lt;li>都是弱符号时，选择占用空间最大的，如选择double类型的而不选择int类型的。
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>变量名称&lt;/th>
+ &lt;th>初始化&lt;/th>
+ &lt;th>未初始化&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>全局变量&lt;/td>
+ &lt;td>.data&lt;/td>
+ &lt;td>.common&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>静态全局变量&lt;/td>
+ &lt;td>.data&lt;/td>
+ &lt;td>.bss&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>静态局部变量&lt;/td>
+ &lt;td>.data&lt;/td>
+ &lt;td>.bss&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">g_init_var&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// .data
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">static&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">sg_init_var&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">20&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// .data
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">g_uninit_var&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// .common
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="k">static&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">sg_uninit_var&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// .bss
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">argc&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">char&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="n">argv&lt;/span>&lt;span class="p">[])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">static&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">sl_init_var&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">30&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// .data
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">static&lt;/span> &lt;span class="kt">int&lt;/span> &lt;span class="n">sl_uninit_var&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>强引用和弱引用详见3.5.5&lt;/strong>&lt;/p></description></item><item><title>2编译和链接</title><link>https://blog.zy9826.site/notebook/a53d55b01c51/</link><pubDate>Mon, 10 Jun 2024 22:25:07 +0800</pubDate><guid>https://blog.zy9826.site/notebook/a53d55b01c51/</guid><category domain="https://blog.zy9826.site/categories/%E7%AC%94%E8%AE%B0/">笔记</category><description>&lt;h2 id="温度而知新" class="heading-element">&lt;span>温度而知新&lt;/span>
+ &lt;a href="#%e6%b8%a9%e5%ba%a6%e8%80%8c%e7%9f%a5%e6%96%b0" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ol>
+&lt;li>北桥：负责CPU，GPU，内存等高速设备。南桥：负责键盘，鼠标，硬盘等低速设备&lt;/li>
+&lt;li>运行库使用操作系统提供的系统调用接口（System Call Interface），系统调用接口在实现中往往以软件中断（Software Interrupt）的方式提供，比如Linux使用0x80号中断作为系统调用接口，Windows使用0x2E号中断作为系统调用接口（从Windows XP Sp2开始，Windows开始采用一种新的系统调用方式）。&lt;/li>
+&lt;li>操作系统的一个功能是提供抽象的皆苦，另外一个主要功能是管理硬件资源。&lt;/li>
+&lt;li>线程优先级改变一般有三种方式：
+&lt;ul>
+&lt;li>用户指定优先级&lt;/li>
+&lt;li>根据进入等待状态的频繁程序提升或降低优先级&lt;/li>
+&lt;li>长时间得不到执行而被提升优先级&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="编译步骤" class="heading-element">&lt;span>编译步骤&lt;/span>
+ &lt;a href="#%e7%bc%96%e8%af%91%e6%ad%a5%e9%aa%a4" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;p>编译分为4个步骤：预处理、编译、汇编、链接&lt;/p>
+&lt;h3 id="预处理" class="heading-element">&lt;span>预处理&lt;/span>
+ &lt;a href="#%e9%a2%84%e5%a4%84%e7%90%86" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>预处理过程主要处理那些源代码文件中的以“#”开始的预编译指令。比如“include”，“#define”等&lt;/p>
+&lt;div class="highlight" title="预处理">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gcc -E hello.c -o hello.i
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cpp hello.c &amp;gt; hello.i&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="编译" class="heading-element">&lt;span>编译&lt;/span>
+ &lt;a href="#%e7%bc%96%e8%af%91" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>编译过程就是把预处理完的文件进行一系列词法分析，语法分析，语义分析及优化后生成的相应的汇编代码文件，这个过程往往是我们所说的整个程序构建的核心部分，也是最复杂的部分之一。&lt;/p>
+&lt;div class="highlight" title="编译">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">gcc -S hello.i -o hello.s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/usr/lib/gcc/x86_64-linux-gnu/8/cc1 hello.c&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="汇编" class="heading-element">&lt;span>汇编&lt;/span>
+ &lt;a href="#%e6%b1%87%e7%bc%96" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>汇编器是将汇编代码转变成机器可以执行的指令，每一个汇编语句几乎都对应一条机器指令。&lt;/p>
+&lt;div class="highlight" title="汇编">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">as hello.s -o hello.o
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gcc -c hello.s -o hello.o&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="链接" class="heading-element">&lt;span>链接&lt;/span>
+ &lt;a href="#%e9%93%be%e6%8e%a5" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h3>&lt;p>链接过程主要包括了地址和控件分配、符号决议和重定位等这些步骤。最基本的静态链接，每个模块的源代码文件（如.c）文件经过编译器编译成目标文件（ObjectFile，一般扩展名为.o或.obj），目标文件和库（Library）一起链接形成最终可执行文件。而最常见的库就是运行时库&lt;/p>
+&lt;ol>
+&lt;li>为什么汇编器不直接输出可执行文件而是输出一个目标文件呢？&lt;/li>
+&lt;li>链接过程到底包含了什么内容？&lt;/li>
+&lt;li>为什么要链接？&lt;/li>
+&lt;/ol></description></item><item><title>常用指令记录</title><link>https://blog.zy9826.site/posts/bd4437ab5963/</link><pubDate>Tue, 28 May 2024 12:01:06 +0800</pubDate><guid>https://blog.zy9826.site/posts/bd4437ab5963/</guid><category domain="https://blog.zy9826.site/categories/draft/">Draft</category><description>&lt;h2 id="hugo" class="heading-element">&lt;span>hugo&lt;/span>
+ &lt;a href="#hugo" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>hugo创建新文章
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo new posts/xxx.md
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo new content posts/xxx.md&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>hugo启动项目
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo server -D 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># build草稿文章&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo server --buildDrafts 
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 实时预览&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo server -D --disableFastRender &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>md增加全角缩进&lt;code>&amp;amp;emsp;&lt;/code>, 半角缩进&lt;code>&amp;amp;ensp;&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="iptables" class="heading-element">&lt;span>iptables&lt;/span>
+ &lt;a href="#iptables" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>查看INPUTt表: &lt;code>iptables -L INPUT -n --line-numbers&lt;/code>&lt;/li>
+&lt;li>追加到INPUT表: &lt;code>iptables -A INPUT -s 42.192.6.197 -j DROP&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="git" class="heading-element">&lt;span>git&lt;/span>
+ &lt;a href="#git" class="heading-mark">
+ &lt;svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">&lt;path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z">&lt;/path>&lt;/svg>
+ &lt;/a>
+&lt;/h2>&lt;ul>
+&lt;li>git远程删除分支&lt;code>git push origin --delete remotebranch&lt;/code> 和 &lt;code>git push origin :remotebranch&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>less用法&lt;br>
+less可以使用鼠标滚轮翻页，-N显示行号 -e显示百分比&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th>&lt;strong>less&lt;/strong>&lt;/th>
+ &lt;th>&lt;strong>向上翻页&lt;/strong>&lt;/th>
+ &lt;th>&lt;strong>向下翻页&lt;/strong>&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td>&lt;strong>一页&lt;/strong>&lt;/td>
+ &lt;td>k&lt;/td>
+ &lt;td>j 空格&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>半页&lt;/strong>&lt;/td>
+ &lt;td>u (up)&lt;/td>
+ &lt;td>d (down)&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td>&lt;strong>一行&lt;/strong>&lt;/td>
+ &lt;td>b&lt;/td>
+ &lt;td>f 回车&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table></description></item></channel></rss>
